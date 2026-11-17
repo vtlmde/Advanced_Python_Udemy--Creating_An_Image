@@ -1,47 +1,46 @@
-import numpy as np
-from PIL import Image
+from canvas import canvas
+from shapes import square,rectangle
 
-class square:
+# Get canvas width and height from the user: 
+canvas_width = int( input( "Enter canvas width :" ) )
+canvas_height = int( input( "Enter canvas height :" ) )
 
-    """
-    a square color patch on the canva
-    """
+# make a dictionnary of color codes and prompt for color
+colors = {"white": (255,255,255), "black":(0,0,0)}
+canvas_color = input("Enter canvas color (white or black): ")
+
+# Create a canvas with the user data 
+canvas1=canvas(canvas_width,canvas_height,colors[canvas_color])
+
+while True: 
+    shape_type = input("Which shape would you like to draw? Square or Rectangle ?: ")
+
+    if shape_type.lower() == "rectangle":
+        rec_x = int(input("Enter x of the rectangle: "))
+        rec_y = int(input("Enter y of the rectangle: "))
+        rec_width = int(input("Enter the width of the rectangle: "))
+        rec_height = int(input("Enter the height of the rectangle: "))
+        red = int(input("How much red should the rectangle have: "))
+        green = int(input("How much green should the rectangle have: "))
+        blue = int(input("How much blue should the rectangle have: "))
+
+        # create the rectangle 
+        r1 = rectangle ( x=rec_x , y=rec_y , height = rec_height, width = rec_width , color = (red, green, blue))
+        r1.draw(canvas1)
+
+    elif shape_type.lower() == "square":
+            sqr_x = int(input("Enter x of the square: "))
+            sqr_y = int(input("Enter y of the square: "))
+            sqr_side = int(input("Enter the side length of the square: "))
+            red = int(input("How much red should the square have: "))
+            green = int(input("How much green should the square have: "))
+            blue = int(input("How much blue should the square have: "))
     
-    def __init__(self, x, y, side, color):
-        self.x = x
-        self.y = y
-        self.side = side
-        self.color = color
-
-    def draw (self, canvas):
-        pass
-
-class rectangle: 
-
-    """
-    a rectangular color patch on the canva
-    """
-
-    def __init__(self, x, y, width, height, color):
-            self.x = x
-            self.y = y
-            self.width = width
-            self.height = height
-            self.color = color
+            # create the square 
+            sqr1 = square ( x=sqr_x , y=sqr_y ,  side= sqr_side , color = (red, green, blue))
+            sqr1.draw(canvas1)
     
-    def draw (self, canvas):
-        pass
-
-class canvas:
-
-    """
-        a white canva on which color patches will be applied to create an image.
-    """
-    
-    def __init__(self, width, height, color):
-        self.width = width
-        self.height = height
-        self.color = color
-    
-    def make (imagepath):
-         pass
+    else: 
+        print("Not an accepted value. Generating your image and exiting now.")
+        canvas1.make('canvas1.png')
+        break
